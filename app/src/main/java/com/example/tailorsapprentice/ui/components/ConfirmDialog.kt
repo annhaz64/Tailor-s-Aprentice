@@ -1,38 +1,29 @@
 package com.example.tailorsapprentice.ui.components
 
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 
-/**
- * Small reusable confirmation dialog.
- *
- * title: dialog title
- * message: dialog message/body
- * confirmText: text for confirm button (e.g., "Delete")
- * dismissText: text for cancel/dismiss button (e.g., "Cancel")
- * onConfirm: invoked when user confirms
- * onDismiss: invoked when user cancels/dismisses
- */
 @Composable
 fun ConfirmDialog(
+    open: Boolean,
     title: String,
     message: String,
-    confirmText: String = "Confirm",
-    dismissText: String = "Cancel",
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    if (!open) return
+
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(title) },
-        text = { Text(message) },
+        title = { Text(text = title) },
+        text = { Text(text = message) },
         confirmButton = {
-            Button(onClick = onConfirm) { Text(confirmText) }
+            TextButton(onClick = onConfirm) { Text("Confirm") }
         },
         dismissButton = {
-            Button(onClick = onDismiss) { Text(dismissText) }
+            TextButton(onClick = onDismiss) { Text("Cancel") }
         }
     )
 }
